@@ -1,0 +1,656 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseLatest matches snapshot: table-a-snapshot 1`] = `
+Array [
+  Object {
+    "address": "0x5757cdac76683524bda20a26dd137ac558a6f583",
+    "age": Object {
+      "number": 21,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 1144,
+    "name": Object {
+      "long": "JET FUEL",
+      "short": "JET",
+    },
+  },
+  Object {
+    "address": "0x2aef991c3e90e1d691cc7608dff1b2b663a56284",
+    "age": Object {
+      "number": 27,
+      "unit": "min",
+    },
+    "last5m": 12.2,
+    "liquidity": 26552,
+    "name": Object {
+      "long": "SAVEUKRAINETOKEN",
+      "short": "SAVEUA",
+    },
+  },
+  Object {
+    "address": "0x6fe17e2faf2c46fbe8d5429a970695da04272356",
+    "age": Object {
+      "number": 28,
+      "unit": "min",
+    },
+    "last5m": 7.6,
+    "liquidity": 1235,
+    "name": Object {
+      "long": "Pikatama",
+      "short": "PIKATA",
+    },
+  },
+  Object {
+    "address": "0xe771eae78b59dcbeb14d539138d2afc95399c806",
+    "age": Object {
+      "number": 31,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 6041,
+    "name": Object {
+      "long": "ICPPAD LaunchPad",
+      "short": "ICPPAD",
+    },
+  },
+  Object {
+    "address": "0xe440c1cd4b94b799fd9c81f1ab0cc7dc6dce7aa8",
+    "age": Object {
+      "number": 34,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 42533,
+    "name": Object {
+      "long": "WALKEE",
+      "short": "WALKEE",
+    },
+  },
+  Object {
+    "address": "0x995460529902d2c7a8182e1895b9b69080cb8468",
+    "age": Object {
+      "number": 34,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 4446,
+    "name": Object {
+      "long": "NewCityMetaverse",
+      "short": "NCM",
+    },
+  },
+  Object {
+    "address": "0x15373ac82b7d3cb03b8ce1c025b7944e239c118f",
+    "age": Object {
+      "number": 36,
+      "unit": "min",
+    },
+    "last5m": -2.31,
+    "liquidity": 499,
+    "name": Object {
+      "long": "No1SHIB",
+      "short": "No1SHIB",
+    },
+  },
+  Object {
+    "address": "0x9e65c0ee092269f032178fafce9added080c3ad9",
+    "age": Object {
+      "number": 37,
+      "unit": "min",
+    },
+    "last5m": -1.27,
+    "liquidity": 11710,
+    "name": Object {
+      "long": "ICPPAD LaunchPad",
+      "short": "ICPPAD",
+    },
+  },
+  Object {
+    "address": "0x3b39046866ea40251cfb7ff99df1c804923d4c65",
+    "age": Object {
+      "number": 37,
+      "unit": "min",
+    },
+    "last5m": -31.78,
+    "liquidity": 3864,
+    "name": Object {
+      "long": "DubaiJiru",
+      "short": "DubaiJiru",
+    },
+  },
+  Object {
+    "address": "0x0cad7347767b9d04138dfbfbfd93a15567fa9301",
+    "age": Object {
+      "number": 38,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 47499,
+    "name": Object {
+      "long": "UpperdeckNetwork",
+      "short": "UDK",
+    },
+  },
+  Object {
+    "address": "0xc51e3643570ab9771d57c8bffacac3e5e62cbb34",
+    "age": Object {
+      "number": 40,
+      "unit": "min",
+    },
+    "last5m": 1.23,
+    "liquidity": 13234,
+    "name": Object {
+      "long": "Funny Monkey",
+      "short": "FM",
+    },
+  },
+  Object {
+    "address": "0xf2c3d60c55b370301862e08f3453f0344b1f72cd",
+    "age": Object {
+      "number": 42,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 1368,
+    "name": Object {
+      "long": "Dubai Jiru",
+      "short": "DBJ",
+    },
+  },
+  Object {
+    "address": "0x732ae2d4de6905cc33afdfdc2f86016b116171c2",
+    "age": Object {
+      "number": 46,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 88235,
+    "name": Object {
+      "long": "Yakuza INU",
+      "short": "YAKUZA",
+    },
+  },
+  Object {
+    "address": "0x768dabb48f75dff025b858b7dc91013546ca71ef",
+    "age": Object {
+      "number": 47,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 653,
+    "name": Object {
+      "long": "FitApe",
+      "short": "FitApe",
+    },
+  },
+  Object {
+    "address": "0xad265a86f5d47ef4049e19ae8a607c7aa62e93d5",
+    "age": Object {
+      "number": 48,
+      "unit": "min",
+    },
+    "last5m": 10.24,
+    "liquidity": 1980,
+    "name": Object {
+      "long": "KyokashiInu",
+      "short": "KYOKASHI",
+    },
+  },
+  Object {
+    "address": "0x31b43890bd5afd0971f52cb79f6092a0ccb5192c",
+    "age": Object {
+      "number": 49,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 364,
+    "name": Object {
+      "long": "Book Bird",
+      "short": "BBird",
+    },
+  },
+  Object {
+    "address": "0x8f3f914c39fd81cdf4f15138744eec7c9173f7a9",
+    "age": Object {
+      "number": 51,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 582,
+    "name": Object {
+      "long": "GTA Doge",
+      "short": "GTADOGE",
+    },
+  },
+  Object {
+    "address": "0x64f8d0fe2d8fa3062280c13ecbc27079db61264d",
+    "age": Object {
+      "number": 53,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 578,
+    "name": Object {
+      "long": "DubaiJiru",
+      "short": "DubaiJiru",
+    },
+  },
+  Object {
+    "address": "0x186a3ac1f9b275ccc0b6d99edf1e50f23fd0867d",
+    "age": Object {
+      "number": 54,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 311,
+    "name": Object {
+      "long": "Democ Token",
+      "short": "Democ test",
+    },
+  },
+  Object {
+    "address": "0xae4277b7c65a2ba1ae9b799390291276dbbe7d3e",
+    "age": Object {
+      "number": 55,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 1038,
+    "name": Object {
+      "long": "ZACKY",
+      "short": "ZACKY",
+    },
+  },
+  Object {
+    "address": "0x727ef4b335b1259e34cbfcb6af49e76af1daf2a9",
+    "age": Object {
+      "number": 56,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 1741,
+    "name": Object {
+      "long": "NewCityMetaverse",
+      "short": "NCM",
+    },
+  },
+  Object {
+    "address": "0x41ab936135ed238f9f563e2565354ce9e4f93ffa",
+    "age": Object {
+      "number": 56,
+      "unit": "min",
+    },
+    "last5m": 8.38,
+    "liquidity": 396,
+    "name": Object {
+      "long": "Tanuki Kitsune",
+      "short": "Tanukitsu",
+    },
+  },
+  Object {
+    "address": "0xdcebd919509da96e2ea5232be19450a3515d7809",
+    "age": Object {
+      "number": 57,
+      "unit": "min",
+    },
+    "last5m": 0,
+    "liquidity": 555,
+    "name": Object {
+      "long": "Strike lucky",
+      "short": "SLYZ",
+    },
+  },
+  Object {
+    "address": "0xdc95718a0fd35fa10dabddf08a13df14a5a3b47e",
+    "age": Object {
+      "number": 58,
+      "unit": "min",
+    },
+    "last5m": 21.73,
+    "liquidity": 538,
+    "name": Object {
+      "long": "BLOCKWALL",
+      "short": "BWL",
+    },
+  },
+  Object {
+    "address": "0x8a5f17dbc4d68bff122c7b3d60b85b33cb8b64e1",
+    "age": Object {
+      "number": 1,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 545,
+    "name": Object {
+      "long": "Swage Boy",
+      "short": "SWAGE",
+    },
+  },
+  Object {
+    "address": "0xb886baa48b94a275c5435ef7ad126d7d54189394",
+    "age": Object {
+      "number": 1,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 1508,
+    "name": Object {
+      "long": "Cola",
+      "short": "Cola",
+    },
+  },
+  Object {
+    "address": "0xfab9b22ce76afdd3f526abf4cb035ae160bdcdf1",
+    "age": Object {
+      "number": 1,
+      "unit": "h",
+    },
+    "last5m": -7.43,
+    "liquidity": 139994,
+    "name": Object {
+      "long": "Sisters",
+      "short": "STR",
+    },
+  },
+  Object {
+    "address": "0x1595e66facab6ac8e63bc65159786d35a7123019",
+    "age": Object {
+      "number": 1,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 45109,
+    "name": Object {
+      "long": "Venom Inu",
+      "short": "VenomInu",
+    },
+  },
+  Object {
+    "address": "0x82506c025ab4295f3ce6b18c28efc5f899fc7c88",
+    "age": Object {
+      "number": 1,
+      "unit": "h",
+    },
+    "last5m": 0.84,
+    "liquidity": 868146,
+    "name": Object {
+      "long": "Defilancer Token",
+      "short": "DEFILANCER",
+    },
+  },
+  Object {
+    "address": "0xb493579b25b54487712040cd500c215b846f8e65",
+    "age": Object {
+      "number": 1,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 7889,
+    "name": Object {
+      "long": "QFA",
+      "short": "QFA",
+    },
+  },
+  Object {
+    "address": "0x9a9e36d4b5c99a3b3c657bfccae829f4428c716e",
+    "age": Object {
+      "number": 1,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 1050,
+    "name": Object {
+      "long": "BabyBOOKSHIB",
+      "short": "BBSHIB",
+    },
+  },
+  Object {
+    "address": "0x805b13e2c12aed14653f49b8a67ab667780d9b19",
+    "age": Object {
+      "number": 1,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 11080,
+    "name": Object {
+      "long": "LockPaybaby",
+      "short": "LBB",
+    },
+  },
+  Object {
+    "address": "0x7aefae72d8f82342c7a285bbcca8cc15eedc0b66",
+    "age": Object {
+      "number": 1,
+      "unit": "h",
+    },
+    "last5m": 15.44,
+    "liquidity": 1952,
+    "name": Object {
+      "long": "Rakki Inu",
+      "short": "RAKI",
+    },
+  },
+  Object {
+    "address": "0x441b51ca637c6486ab86c0ce6cf1e0d296a0b865",
+    "age": Object {
+      "number": 1,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 1239,
+    "name": Object {
+      "long": "Inu Yasha",
+      "short": "INUYASHA",
+    },
+  },
+  Object {
+    "address": "0x5477a00835961d6dd6982922b355b409fe3efec2",
+    "age": Object {
+      "number": 1,
+      "unit": "h",
+    },
+    "last5m": 38.33,
+    "liquidity": 51035,
+    "name": Object {
+      "long": "CloudChat Token",
+      "short": "CC",
+    },
+  },
+  Object {
+    "address": "0x054ce1d5aab64850270b39aec36af01a7808c6e3",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 226,
+    "name": Object {
+      "long": "The King",
+      "short": "The King",
+    },
+  },
+  Object {
+    "address": "0xd06e20e6f861fdfbfbd8e9155d7a7b5d51cc6d99",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 12.22,
+    "liquidity": 30785,
+    "name": Object {
+      "long": "Beerus",
+      "short": "BEERUS",
+    },
+  },
+  Object {
+    "address": "0x5e5dd4c5802fed26be73ad6e3337452e5648ddf5",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": -1.54,
+    "liquidity": 4352,
+    "name": Object {
+      "long": "Tempest",
+      "short": "TMP",
+    },
+  },
+  Object {
+    "address": "0x11ea84f59314de35e59991eea6e58f9c4aad756d",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 950,
+    "name": Object {
+      "long": "FitApe",
+      "short": "FitApe",
+    },
+  },
+  Object {
+    "address": "0xab3be61d75319be9741222969dc25f350ffa5ca9",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 647,
+    "name": Object {
+      "long": "Milk Nami Inu",
+      "short": "MNI",
+    },
+  },
+  Object {
+    "address": "0x1deac56b418dd8a94118dcaad23108af5df71ed7",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 45.23,
+    "liquidity": 654,
+    "name": Object {
+      "long": "BookDoge",
+      "short": "BookDog",
+    },
+  },
+  Object {
+    "address": "0x7fa480e36dda40f9a4a309c1c1a3ab3d8a82086b",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 590,
+    "name": Object {
+      "long": "BusdBank",
+      "short": "BUSDBANK",
+    },
+  },
+  Object {
+    "address": "0x96233c82c9006b3dbf202f980be6c30b72a988c1",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 258,
+    "name": Object {
+      "long": "OnePunch Inu",
+      "short": "opINU",
+    },
+  },
+  Object {
+    "address": "0xc29414dc5e75ac6132de9506e8b8d62c8a3f085c",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": -3.23,
+    "liquidity": 4752,
+    "name": Object {
+      "long": "Ape Jiru Inu",
+      "short": "AJINU",
+    },
+  },
+  Object {
+    "address": "0x8bbc9798e8934a6e6c9a642c5a51367babb60326",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 561,
+    "name": Object {
+      "long": "YAMATOINU",
+      "short": "YAMATOINU",
+    },
+  },
+  Object {
+    "address": "0x2fe096eaa9cdfaafebc1b8c428882232287a1d51",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 331,
+    "name": Object {
+      "long": "Tiger",
+      "short": "TIG",
+    },
+  },
+  Object {
+    "address": "0x14340883d55d1f1fa667383b2aca7854c321259e",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 79133,
+    "name": Object {
+      "long": "Defilancer Token",
+      "short": "DEFILANCER",
+    },
+  },
+  Object {
+    "address": "0x20f39921f2561cc432c562ba3eda1a0049acd9ae",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 12584,
+    "name": Object {
+      "long": "Defilancer Token",
+      "short": "DEFILANCER",
+    },
+  },
+  Object {
+    "address": "0x559f8a60724c231c9762c249e60bc41f7d80f7ce",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 258,
+    "name": Object {
+      "long": "HHSW",
+      "short": "HHSW",
+    },
+  },
+  Object {
+    "address": "0x7c45660f2535e4093d20c3886ca5a37115674b4f",
+    "age": Object {
+      "number": 2,
+      "unit": "h",
+    },
+    "last5m": 0,
+    "liquidity": 512,
+    "name": Object {
+      "long": "Ser Inu",
+      "short": "SERINU",
+    },
+  },
+]
+`;
