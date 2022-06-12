@@ -2,7 +2,7 @@
   "scripts": {
     "test": "jest",
     "typecheck": "tsc --noEmit",
-    "bundle": "esbuild ./src/index.ts --minify --bundle --outfile=bundled/index.js --platform=node --target=node17.9"
+    "bundle": "esbuild ./src/index.ts --minify --bundle --outfile=bundled/token-notifier.js --platform=node --target=node17.9"
   },
   "devDependencies": {
     "@types/jest": "^28.1.1",
