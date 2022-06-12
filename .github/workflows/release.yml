@@ -1,9 +1,6 @@
-name: Releases
+name: Release
 
-on:
-  push:
-    tags:
-      - "*"
+on: [push]
 
 jobs:
   build:
@@ -12,6 +9,11 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 17
+      - run: yarn
+      - run: yarn bundle
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "bundled/index.js"
