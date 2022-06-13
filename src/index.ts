@@ -85,7 +85,7 @@ program
                 type: "trending",
               });
           } else {
-            logger.info(`No matching coins found in trending.`);
+            logger.info(`No matching coins found in latest.`);
           }
         }
 

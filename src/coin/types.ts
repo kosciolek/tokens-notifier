@@ -1,4 +1,5 @@
 export interface Coin {
+  name: string;
   chart: string;
   swap: string;
   price: string;

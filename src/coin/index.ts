@@ -8,6 +8,11 @@ const createPooChartLink = (address: string) =>
 const createPancakeSwapLink = (address: string) =>
   `https://pancakeswap.finance/swap?outputCurrency=${address}`;
 
+const parseName = ($: CheerioAPI) => {
+  const text = $(".coin_info_desktop .nested_header").text();
+  return text;
+};
+
 const parsePrice = ($: CheerioAPI) => {
   const node = $(".contact_div .info_heading").filter((_, node) => {
     const text = load(node.cloneNode(true)).text();
@@ -57,6 +62,7 @@ const parseLast = ($: CheerioAPI, label: "5m" | "1h" | "6h" | "24h") => {
 };
 
 const parseCoin = ($: CheerioAPI) => {
+  const name = parseName($);
   const price = parsePrice($);
   const marketCap = parseMarketCap($);
   const liquidity = parseLiquidity($);
@@ -66,6 +72,7 @@ const parseCoin = ($: CheerioAPI) => {
   const last24h = parseLast($, "24h");
 
   return {
+    name,
     price,
     marketCap,
     liquidity,

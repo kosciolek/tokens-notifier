@@ -4,7 +4,7 @@ import { Coin } from "../coin/types";
 const formatCoin = (coin: Coin, type: "latest" | "trending") =>
   `
 Rising in *${type.toUpperCase()}*
-*Name, todo*
+_${coin.name}_
 *Price*: ${coin.price}
 *Liquidity*: ${coin.liquidity}
 *Market cap*: ${coin.marketCap}
