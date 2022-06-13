@@ -16,5 +16,5 @@ jobs:
       - run: yarn bundle
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "bundled/token-notifier.js"
+          artifacts: "bundled/token-notifier.js,start.cmd"
           token: ${{ secrets.GITHUB_TOKEN }}

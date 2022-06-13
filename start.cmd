@@ -1,0 +1,1 @@
+node token-notifier.js -i 3600 -n silent
