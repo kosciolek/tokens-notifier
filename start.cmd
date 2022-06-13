@@ -1,1 +1,1 @@
-node token-notifier.js -i 3600 -n silent
+node token-notifier.js --interval 3600 --notifications telegram --telegram-token "12321345345:SRJKLAJK3L45lkaj53l4jLQJ#$kj3213d12l" --telegram-chat-id "-5465346466543"
