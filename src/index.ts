@@ -63,7 +63,7 @@ program
               type: "latest",
             });
         } else {
-          logger.info("No matching coins found in trending, checking latest");
+          logger.info("No matching coins found in trending.");
           const trending = await getTrending();
           const filtered = filterTrending(trending);
           if (filtered.length) {
