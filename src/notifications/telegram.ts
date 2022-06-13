@@ -3,13 +3,15 @@ import { Coin } from "../coin/types";
 
 const formatCoin = (coin: Coin, type: "latest" | "trending") =>
   `
-Rising in *${type.toUpperCase()}*
-_${coin.name}_
+_${coin.name} IS RISING 🚀_
 *Price*: ${coin.price}
 *Liquidity*: ${coin.liquidity}
 *Market cap*: ${coin.marketCap}
-*Last 5m*: ${coin.last5m ?? "--"}%
-*Last 1h*: ${coin.last1h ?? "--"}%
+${
+  type === "trending"
+    ? `*Last 5m*: ${coin.last5m ?? "--"}%`
+    : `*Last 1h*: ${coin.last1h ?? "--"}%`
+}
 *Poocoin chart*: ${coin.chart}
 *Pancake swap*: ${coin.swap}
 `.trim();
