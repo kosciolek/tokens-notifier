@@ -20,6 +20,7 @@
     "got": "11",
     "node-notifier": "^10.0.1",
     "open": "^8.4.0",
+    "telegraf": "^4.8.5",
     "winston": "^3.7.2"
   }
 }

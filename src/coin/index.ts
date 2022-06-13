@@ -26,9 +26,7 @@ const parseMarketCap = ($: CheerioAPI) => {
   });
 
   const text = node.next().text();
-  const number = parseDollarPrefixed(text);
-
-  return number;
+  return text;
 };
 
 const parseLiquidity = ($: CheerioAPI) => {
@@ -38,9 +36,7 @@ const parseLiquidity = ($: CheerioAPI) => {
   });
 
   const text = node.next().text();
-  const number = parseDollarPrefixed(text);
-
-  return number;
+  return text;
 };
 
 const parseLast = ($: CheerioAPI, label: "5m" | "1h" | "6h" | "24h") => {

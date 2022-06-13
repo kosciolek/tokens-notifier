@@ -6,7 +6,7 @@ import { logger } from "./logger";
 import { getTrending } from "./trending";
 import { generateTimestampedFilename, sleep } from "./utils";
 import * as fs from "node:fs";
-import { notify } from "./notifications";
+import { sendTelegramNotification } from "./notifications/telegram";
 
 program
   .allowExcessArguments(false)
@@ -25,30 +25,26 @@ program
   .addOption(
     new Option("-n, --notifications <type>", "Where to send notifications?")
       .makeOptionMandatory()
-      .preset("local")
-      .choices(["silent", "system", "telegram"])
+      .choices(["telegram"])
   )
-  .action(async ({ interval, notifications }) => {
-    while (true) {
-      const latest = await getLatest();
-      const filtered = filterLatest(latest);
+  .addOption(
+    new Option(
+      "--telegram-token <token>",
+      "The telegram bot token. Mandatory if `notifications=telegram` https://core.telegram.org/bots/api"
+    )
+  )
+  .addOption(
+    new Option(
+      "--telegram-chat-id <chat-id>",
+      "The telegram chat id. Mandatory if `notifications=telegram`"
+    )
+  )
+  .action(
+    async ({ interval, notifications, telegramChatId, telegramToken }) => {
+      while (true) {
+        const latest = await getLatest();
+        const filtered = filterLatest(latest);
 
-      if (filtered.length) {
-        const coins = await Promise.all(
-          filtered.map((record) => getCoin(record.address))
-        );
-
-        const filePath = generateTimestampedFilename("tokens.txt");
-        logger.info(
-          `Matching coins found in latest: ${filtered.length}, writing to ${filePath}`
-        );
-        fs.writeFileSync(filePath, JSON.stringify(coins, null, 2));
-        if (notifications === "system")
-          notify("latest", filtered.length, filePath);
-      } else {
-        logger.info("No matching coins found in trending, checking latest");
-        const trending = await getTrending();
-        const filtered = filterTrending(trending);
         if (filtered.length) {
           const coins = await Promise.all(
             filtered.map((record) => getCoin(record.address))
@@ -56,16 +52,46 @@ program
 
           const filePath = generateTimestampedFilename("tokens.txt");
           logger.info(
-            `Matching coins found in trending: ${filtered.length}, writing to ${filePath}`
+            `Matching coins found in latest: ${filtered.length}, writing to ${filePath}`
           );
           fs.writeFileSync(filePath, JSON.stringify(coins, null, 2));
-          if (notifications === "system")
-            notify("trending", filtered.length, filePath);
-        }
-      }
+          if (notifications === "telegram")
+            sendTelegramNotification({
+              chatId: telegramChatId,
+              coins,
+              token: telegramToken,
+              type: "latest",
+            });
+        } else {
+          logger.info("No matching coins found in trending, checking latest");
+          const trending = await getTrending();
+          const filtered = filterTrending(trending);
+          if (filtered.length) {
+            const coins = await Promise.all(
+              filtered.map((record) => getCoin(record.address))
+            );
 
-      logger.info(`Sleeping for ${interval} seconds.`);
-      await sleep(interval * 1000);
+            const filePath = generateTimestampedFilename("tokens.txt");
+            logger.info(
+              `Matching coins found in trending: ${filtered.length}, writing to ${filePath}`
+            );
+            fs.writeFileSync(filePath, JSON.stringify(coins, null, 2));
+
+            if (notifications === "telegram")
+              sendTelegramNotification({
+                chatId: telegramChatId,
+                coins,
+                token: telegramToken,
+                type: "trending",
+              });
+          } else {
+            logger.info(`No matching coins found in trending.`);
+          }
+        }
+
+        logger.info(`Sleeping for ${interval} seconds.`);
+        await sleep(interval * 1000);
+      }
     }
-  })
+  )
   .parseAsync();
