@@ -51,3 +51,12 @@ export const generateTimestampedFilename = (ext = "txt") => {
       "0"
     )} ${now.getDate()}-${now.getMonth()}-${now.getFullYear()}.${ext}`;
 };
+
+export const sortBy = <T>(
+  array: T[],
+  selector: (obj: T) => number | undefined
+) =>
+  [...array].sort(
+    (a, b) =>
+      (selector(b) ?? Number.MIN_VALUE) - (selector(a) ?? Number.MIN_VALUE)
+  );
