@@ -4,8 +4,7 @@ import { filterLatest, filterTrending } from "./filters";
 import { getLatest } from "./latest";
 import { logger } from "./logger";
 import { getTrending } from "./trending";
-import { generateTimestampedFilename, sleep, sortBy } from "./utils";
-import * as fs from "node:fs";
+import { sleep, sortBy } from "./utils";
 import { sendTelegramNotification } from "./notifications/telegram";
 import { Deduplicator } from "./deduplicator";
 
@@ -57,76 +56,67 @@ program
     }) => {
       const deduplicator = new Deduplicator(notificationTimeout);
 
-      while (true) {
+      const getMatchingLatest = async () => {
         const latest = await getLatest();
         const filtered = filterLatest(latest);
-
-        if (filtered.length) {
-          const coins = await Promise.all(
-            filtered.map((record) => getCoin(record.address))
-          );
-
-          const dedupedCoins = coins.filter(({ address }) => {
-            if (deduplicator.isFresh(address)) {
-              deduplicator.hit(address);
-              return true;
-            }
-
-            return false;
-          });
-
-          if (dedupedCoins.length) {
-            const filePath = generateTimestampedFilename("tokens.txt");
-            logger.info(
-              `Matching coins found in latest: ${filtered.length}, new: ${dedupedCoins.length}, writing to ${filePath}`
-            );
-            fs.writeFileSync(filePath, JSON.stringify(dedupedCoins, null, 2));
-            sendTelegramNotification({
-              chatId: telegramChatId,
-              coins: sortBy(dedupedCoins, (coin) => coin.last5m).slice(0, 2),
-              token: telegramToken,
-              type: "latest",
-            });
-          } else {
-            logger.info("No new matching coins found in latest.");
-            const trending = await getTrending();
-            const filtered = filterTrending(trending);
-            if (filtered.length) {
-              const coins = await Promise.all(
-                filtered.map((record) => getCoin(record.address))
-              );
-
-              const dedupedCoins = coins.filter(({ address }) => {
-                if (deduplicator.isFresh(address)) {
-                  deduplicator.hit(address);
-                  return true;
-                }
-
-                return false;
-              });
-
-              if (dedupedCoins.length) {
-                const filePath = generateTimestampedFilename("tokens.txt");
-                logger.info(
-                  `Matching coins found in trending: ${filtered.length}, new: ${dedupedCoins.length}, writing to ${filePath}`
-                );
-                fs.writeFileSync(
-                  filePath,
-                  JSON.stringify(dedupedCoins, null, 2)
-                );
-
-                sendTelegramNotification({
-                  chatId: telegramChatId,
-                  coins: sortBy(dedupedCoins, (coin) => coin.last1h).slice(
-                    0,
-                    2
-                  ),
-                  token: telegramToken,
-                  type: "trending",
-                });
-              } else logger.info(`No new matching coins found in trending.`);
-            } else logger.info(`No matching coins found in trending.`);
+        const deduped = filtered.filter(({ address }) => {
+          if (deduplicator.isFresh(address)) {
+            deduplicator.hit(address);
+            return true;
           }
+          return false;
+        });
+
+        logger.info(
+          `Latest | All: ${latest.length} | Filtered ${filtered.length} | Deduplicated: ${deduped.length}`
+        );
+
+        const coins = await Promise.all(
+          deduped.map((record) => getCoin(record.address))
+        );
+
+        return sortBy(coins, (coin) => coin.last5m).slice(0, 2);
+      };
+
+      const getMatchingTrending = async () => {
+        const trending = await getTrending();
+        const filtered = filterTrending(trending);
+        const deduped = filtered.filter(({ address }) => {
+          if (deduplicator.isFresh(address)) {
+            deduplicator.hit(address);
+            return true;
+          }
+          return false;
+        });
+
+        logger.info(
+          `Trending | All: ${trending.length} | Filtered ${filtered.length} | Deduplicated: ${deduped.length}`
+        );
+
+        const coins = await Promise.all(
+          deduped.map((record) => getCoin(record.address))
+        );
+
+        return sortBy(coins, (coin) => coin.last1h).slice(0, 2);
+      };
+
+      while (true) {
+        const latest = await getMatchingLatest();
+        if (latest.length)
+          sendTelegramNotification({
+            chatId: telegramChatId,
+            coins: latest,
+            token: telegramToken,
+            type: "latest",
+          });
+        else {
+          const trending = await getMatchingTrending();
+          sendTelegramNotification({
+            chatId: telegramChatId,
+            coins: trending,
+            token: telegramToken,
+            type: "trending",
+          });
         }
 
         logger.info(`Sleeping for ${interval} seconds.`);
