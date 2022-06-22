@@ -38,20 +38,6 @@ export const parseAge = (age: string) => {
 export const sleep = async (ms: number) =>
   await new Promise((res) => setTimeout(res, ms));
 
-export const generateTimestampedFilename = (ext = "txt") => {
-  const now = new Date();
-  return `${now.getHours().toString().padStart(2, "0")}-${now
-    .getMinutes()
-    .toString()
-    .padStart(2, "0")}-${now
-    .getSeconds()
-    .toString()
-    .padStart(
-      2,
-      "0"
-    )} ${now.getDate()}-${now.getMonth()}-${now.getFullYear()}.${ext}`;
-};
-
 export const sortBy = <T>(
   array: T[],
   selector: (obj: T) => number | undefined
