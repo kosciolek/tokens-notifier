@@ -37,5 +37,4 @@ export const sendTelegramNotification = async ({
     parse_mode: "Markdown",
     disable_web_page_preview: true,
   });
-  }
 };
