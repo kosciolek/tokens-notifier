@@ -3,11 +3,6 @@ import { client } from "../client";
 import { parseDollarPrefixed } from "../utils";
 import { Coin } from "./types";
 
-const createPooChartLink = (address: string) =>
-  `https://poocoin.app/tokens/${address}`;
-const createPancakeSwapLink = (address: string) =>
-  `https://pancakeswap.finance/swap?outputCurrency=${address}`;
-
 const parseName = ($: CheerioAPI) => {
   const text = $(".coin_info_desktop .nested_header").text();
   return text;
