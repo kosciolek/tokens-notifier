@@ -8,7 +8,7 @@ _„${coin.name}” IS RISING 🚀_
 *Liquidity*: ${coin.liquidity}
 *Market cap*: ${coin.marketCap}
 ${
-  type === "trending"
+  type === "latest"
     ? `*Last 5m*: ${coin.last5m ?? "--"}%`
     : `*Last 1h*: ${coin.last1h ?? "--"}%`
 }
@@ -16,7 +16,7 @@ ${coin.chart ? `*Poocoin chart*: ${coin.chart}` : ""}
 ${coin.swap ? `*Pancake swap*: ${coin.swap}` : ""}
 `.trim();
 
-const formatTrending = (coins: Coin[], type: "latest" | "trending") =>
+const format = (coins: Coin[], type: "latest" | "trending") =>
   `
 ${coins.map((coin) => formatCoin(coin, type)).join("\n-------------\n")}
 `.trim();
@@ -33,8 +33,9 @@ export const sendTelegramNotification = async ({
   type: "latest" | "trending";
 }) => {
   const bot = new Telegraf(token);
-  await bot.telegram.sendMessage(chatId, formatTrending(coins, type), {
+  await bot.telegram.sendMessage(chatId, format(coins, type), {
     parse_mode: "Markdown",
     disable_web_page_preview: true,
   });
+  }
 };
