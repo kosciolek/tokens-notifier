@@ -20,6 +20,6 @@ export class Deduplicator {
 
     setTimeout(() => {
       delete this.store[address];
-    }, this.timeout);
+    }, this.timeout * 1000);
   }
 }

@@ -45,7 +45,7 @@ program
       "-t, --notification-timeout <seconds>",
       "Do not notify about the same coin more often than N seconds."
     )
-      .default(2 * 3600 * 1000)
+      .default(2 * 3600)
       .argParser((value) => {
         const number = Number(value);
         if (isNaN(number)) throw new InvalidArgumentError("Not a number.");

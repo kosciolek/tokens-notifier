@@ -11,6 +11,6 @@ Download the most recent release from releases - [link](https://github.com/kosci
 
 ```
 # Check every 3600 seconds (every hour), send notifications to telegram
-node token-notifier.js --interval 3600 --notifications telegram --telegram-token "12321345345:SRJKLAJK3L45lkaj53l4jLQJ#$kj3213d12l" --telegram-chat-id "-5465346466543"
+node token-notifier.js --interval 3600 --notifications telegram --telegram-token "12321345345:SRJKLAJK3L45lkaj53l4jLQJ#$kj3213d12l" --telegram-chat-id "-5465346466543" --notification-timeout 7200
 ```
 
