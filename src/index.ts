@@ -82,7 +82,7 @@ program
 
           const filePath = generateTimestampedFilename("tokens.txt");
           logger.info(
-            `Matching coins found in latest: ${filtered.length}, writing to ${filePath}`
+            `Matching coins found in latest: ${filtered.length}, new: ${dedupedCoins.length}, writing to ${filePath}`
           );
           fs.writeFileSync(filePath, JSON.stringify(dedupedCoins, null, 2));
           if (notifications === "telegram")
@@ -112,7 +112,7 @@ program
 
             const filePath = generateTimestampedFilename("tokens.txt");
             logger.info(
-              `Matching coins found in trending: ${filtered.length}, writing to ${filePath}`
+              `Matching coins found in trending: ${filtered.length}, new: ${dedupedCoins.length}, writing to ${filePath}`
             );
             fs.writeFileSync(filePath, JSON.stringify(dedupedCoins, null, 2));
 
