@@ -12,8 +12,8 @@ ${
     ? `*Last 5m*: ${coin.last5m ?? "--"}%`
     : `*Last 1h*: ${coin.last1h ?? "--"}%`
 }
-*Poocoin chart*: ${coin.chart}
-*Pancake swap*: ${coin.swap}
+${coin.chart ? `*Poocoin chart*: ${coin.chart}` : ""}
+${coin.swap ? `*Pancake swap*: ${coin.swap}` : ""}
 `.trim();
 
 const formatTrending = (coins: Coin[], type: "latest" | "trending") =>

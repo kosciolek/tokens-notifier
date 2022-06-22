@@ -19,7 +19,7 @@ export const filterLatest = (records: LatestRecord[]) =>
         return false;
       return true;
     })
-    .filter((record) => record.last5m >= 10)
+    .filter(({ last5m }) => last5m !== undefined && last5m >= 10)
     .filter((record) => record.liquidity >= 3000);
 
 // Incomplete, I don't know what other time units they use
@@ -51,5 +51,5 @@ export const filterTrending = (records: TrendingRecord[]) =>
       */
       return true;
     })
-    .filter((record) => record.last1h >= 10)
+    .filter(({ last1h }) => last1h !== undefined && last1h >= 10)
     .filter((record) => record.liquidity >= 20000);

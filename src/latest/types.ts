@@ -8,6 +8,6 @@ export interface LatestRecord {
     number: number;
     unit: string;
   };
-  last5m: number;
+  last5m: number | undefined;
   liquidity: number;
 }

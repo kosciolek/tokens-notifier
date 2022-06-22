@@ -1,6 +1,6 @@
 export interface TrendingRecord {
   address: string;
-  last1h: number;
+  last1h: number | undefined;
   liquidity: number;
   age: {
     number: number;

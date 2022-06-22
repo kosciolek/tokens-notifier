@@ -7,6 +7,7 @@ import { getTrending } from "./trending";
 import { generateTimestampedFilename, sleep } from "./utils";
 import * as fs from "node:fs";
 import { sendTelegramNotification } from "./notifications/telegram";
+import { Deduplicator } from "./deduplicator";
 
 program
   .allowExcessArguments(false)
@@ -39,8 +40,28 @@ program
       "The telegram chat id. Mandatory if `notifications=telegram`"
     )
   )
+  .addOption(
+    new Option(
+      "-t, --notification-timeout <seconds>",
+      "Do not notify about the same coin more often than N seconds."
+    )
+      .default(2 * 3600 * 1000)
+      .argParser((value) => {
+        const number = Number(value);
+        if (isNaN(number)) throw new InvalidArgumentError("Not a number.");
+        return number;
+      })
+  )
   .action(
-    async ({ interval, notifications, telegramChatId, telegramToken }) => {
+    async ({
+      interval,
+      notifications,
+      telegramChatId,
+      telegramToken,
+      notificationTimeout,
+    }) => {
+      const deduplicator = new Deduplicator(notificationTimeout);
+
       while (true) {
         const latest = await getLatest();
         const filtered = filterLatest(latest);
@@ -50,15 +71,24 @@ program
             filtered.map((record) => getCoin(record.address))
           );
 
+          const dedupedCoins = coins.filter(({ address }) => {
+            if (deduplicator.isFresh(address)) {
+              deduplicator.hit(address);
+              return true;
+            }
+
+            return false;
+          });
+
           const filePath = generateTimestampedFilename("tokens.txt");
           logger.info(
             `Matching coins found in latest: ${filtered.length}, writing to ${filePath}`
           );
-          fs.writeFileSync(filePath, JSON.stringify(coins, null, 2));
+          fs.writeFileSync(filePath, JSON.stringify(dedupedCoins, null, 2));
           if (notifications === "telegram")
             sendTelegramNotification({
               chatId: telegramChatId,
-              coins,
+              coins: dedupedCoins,
               token: telegramToken,
               type: "latest",
             });
@@ -71,16 +101,25 @@ program
               filtered.map((record) => getCoin(record.address))
             );
 
+            const dedupedCoins = coins.filter(({ address }) => {
+              if (deduplicator.isFresh(address)) {
+                deduplicator.hit(address);
+                return true;
+              }
+
+              return false;
+            });
+
             const filePath = generateTimestampedFilename("tokens.txt");
             logger.info(
               `Matching coins found in trending: ${filtered.length}, writing to ${filePath}`
             );
-            fs.writeFileSync(filePath, JSON.stringify(coins, null, 2));
+            fs.writeFileSync(filePath, JSON.stringify(dedupedCoins, null, 2));
 
             if (notifications === "telegram")
               sendTelegramNotification({
                 chatId: telegramChatId,
-                coins,
+                coins: dedupedCoins,
                 token: telegramToken,
                 type: "trending",
               });

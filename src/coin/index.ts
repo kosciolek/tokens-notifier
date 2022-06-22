@@ -54,12 +54,18 @@ const parseLast = ($: CheerioAPI, label: "5m" | "1h" | "6h" | "24h") => {
   const isNegative = Boolean(value$("i.fa-caret-down").length);
 
   const text = value$.text();
-  if (text === "--") return null;
+  if (text === "--") return undefined;
 
   const digits = text.match(/[\d.]+/)![0];
   const number = Number(digits);
   return isNegative ? -number : number;
 };
+
+const parseChart = ($: CheerioAPI) =>
+  $('a[href*="https://poocoin.app/tokens"]').get(0)?.attribs.href;
+
+const parseSwap = ($: CheerioAPI) =>
+  $('a[href*="https://pancakeswap.finance/swap"]').get(0)?.attribs.href;
 
 const parseCoin = ($: CheerioAPI) => {
   const name = parseName($);
@@ -70,6 +76,8 @@ const parseCoin = ($: CheerioAPI) => {
   const last1h = parseLast($, "1h");
   const last6h = parseLast($, "6h");
   const last24h = parseLast($, "24h");
+  const chart = parseChart($);
+  const swap = parseSwap($);
 
   return {
     name,
@@ -80,6 +88,8 @@ const parseCoin = ($: CheerioAPI) => {
     last1h,
     last6h,
     last24h,
+    chart,
+    swap,
   };
 };
 
@@ -89,9 +99,5 @@ export const getCoin = async (address: string): Promise<Coin> => {
 
   const parsed = parseCoin($);
 
-  return {
-    ...parsed,
-    chart: createPooChartLink(address),
-    swap: createPancakeSwapLink(address),
-  };
+  return { ...parsed, address };
 };
