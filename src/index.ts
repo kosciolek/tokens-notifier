@@ -8,8 +8,6 @@ import { sleep, sortBy } from "./utils";
 import { sendTelegramNotification } from "./notifications/telegram";
 import { Deduplicator } from "./deduplicator";
 
-const getMatchingCoins = () => {};
-
 program
   .allowExcessArguments(false)
   .addOption(
