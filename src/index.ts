@@ -30,7 +30,13 @@ program
   .addOption(
     new Option(
       "--telegram-token <token>",
-      "The telegram bot token. Mandatory if `notifications=telegram` https://core.telegram.org/bots/api"
+      "The telegram bot token. https://core.telegram.org/bots/api"
+    )
+  )
+  .addOption(
+    new Option(
+      "--telegram-chat-id <chat-id>",
+      "The telegram chat id. Mandatory if `notifications=telegram`"
     )
   )
   .addOption(
