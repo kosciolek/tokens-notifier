@@ -115,12 +115,13 @@ program
           });
         else {
           const trending = await getMatchingTrending();
-          sendTelegramNotification({
-            chatId: telegramChatId,
-            coins: trending,
-            token: telegramToken,
-            type: "trending",
-          });
+          if (trending.length)
+            sendTelegramNotification({
+              chatId: telegramChatId,
+              coins: trending,
+              token: telegramToken,
+              type: "trending",
+            });
         }
 
         logger.info(`Sleeping for ${interval} seconds.`);
