@@ -1,6 +1,7 @@
 import { CheerioAPI, load } from "cheerio";
-import { client } from "../client";
-import { parseDollarPrefixed } from "../utils";
+import { HTTPError } from "got";
+import { topTokenApiClient, topTokenClient } from "../client";
+import { getIsScam } from "./getIsScam";
 import { Coin } from "./types";
 
 const parseName = ($: CheerioAPI) => {
@@ -62,7 +63,7 @@ const parseChart = ($: CheerioAPI) =>
 const parseSwap = ($: CheerioAPI) =>
   $('a[href*="https://pancakeswap.finance/swap"]').get(0)?.attribs.href;
 
-const parseCoin = ($: CheerioAPI) => {
+const parseCoin = ($: CheerioAPI): Omit<Coin, "address" | "isScam"> => {
   const name = parseName($);
   const price = parsePrice($);
   const marketCap = parseMarketCap($);
@@ -89,10 +90,11 @@ const parseCoin = ($: CheerioAPI) => {
 };
 
 export const getCoin = async (address: string): Promise<Coin> => {
-  const text = await client.get(`address/${address}`).text();
+  const text = await topTokenClient.get(`address/${address}`).text();
   const $ = load(text);
 
   const parsed = parseCoin($);
+  const isScam = await getIsScam(address);
 
-  return { ...parsed, address };
+  return { ...parsed, isScam, address };
 };

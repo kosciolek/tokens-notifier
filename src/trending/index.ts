@@ -1,5 +1,5 @@
 import { CheerioAPI, load } from "cheerio";
-import { client } from "../client";
+import { topTokenClient } from "../client";
 import { TrendingRecord } from "./types";
 import { parseDollarPrefixed, parseAge as parseAgeGeneric } from "../utils";
 
@@ -63,7 +63,7 @@ export const parseTrending = (html: string): TrendingRecord[] => {
 };
 
 export const getTrending = async (): Promise<TrendingRecord[]> => {
-  const response = await client.get("trending").text();
+  const response = await topTokenClient.get("trending").text();
   const trending = parseTrending(response);
   return trending;
 };

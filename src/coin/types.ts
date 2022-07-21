@@ -10,4 +10,5 @@ export interface Coin {
   last1h: number | undefined;
   last6h: number | undefined;
   last24h: number | undefined;
+  isScam: boolean;
 }

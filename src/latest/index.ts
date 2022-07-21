@@ -1,5 +1,5 @@
 import { CheerioAPI, load } from "cheerio";
-import { client } from "../client";
+import { topTokenClient } from "../client";
 import { LatestRecord } from "./types";
 import { parseAge as parseAgeGeneric, parseDollarPrefixed } from "../utils";
 
@@ -76,7 +76,7 @@ export const parseLatest = (html: string) => {
 };
 
 export const getLatest = async (): Promise<LatestRecord[]> => {
-  const response = await client.get("latest").text();
+  const response = await topTokenClient.get("latest").text();
   const table = parseLatest(response);
   return table;
 };
