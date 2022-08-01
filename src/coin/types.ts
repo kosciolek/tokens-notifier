@@ -1,3 +1,6 @@
+export const knownNetworks = ["ethereum", "binance"] as const;
+
+export type KnownNetwork = typeof knownNetworks[number];
 export interface Coin {
   address: string;
   name: string;
@@ -11,4 +14,7 @@ export interface Coin {
   last6h: number | undefined;
   last24h: number | undefined;
   isScam: boolean;
+  buyFee: number | undefined;
+  sellFee: number | undefined;
+  network: KnownNetwork | string | undefined;
 }

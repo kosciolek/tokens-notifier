@@ -1,12 +1,12 @@
 import { InvalidArgumentError, Option, program } from "commander";
 import { getCoin } from "./coin";
-import { filterLatest, filterTrending } from "./filters";
-import { getLatest } from "./latest";
 import { logger } from "./logger";
 import { getTrending } from "./trending";
 import { sleep, sortBy } from "./utils";
 import { sendTelegramNotification } from "./notifications/telegram";
 import { Deduplicator } from "./deduplicator";
+import { filterCoins, filterRecords } from "./trending/filter";
+import { Coin } from "./coin/types";
 
 program
   .allowExcessArguments(false)
@@ -21,6 +21,7 @@ program
         if (isNaN(number)) throw new InvalidArgumentError("Not a number.");
         return number;
       })
+      .default(60)
   )
   .addOption(
     new Option("-n, --notifications <type>", "Where to send notifications?")
@@ -44,7 +45,7 @@ program
       "-t, --notification-timeout <seconds>",
       "Do not notify about the same coin more often than N seconds."
     )
-      .default(2 * 3600)
+      .default(3600)
       .argParser((value) => {
         const number = Number(value);
         if (isNaN(number)) throw new InvalidArgumentError("Not a number.");
@@ -60,69 +61,52 @@ program
     }) => {
       const deduplicator = new Deduplicator(notificationTimeout);
 
-      const getMatchingLatest = async () => {
-        const latest = await getLatest();
-        const filtered = filterLatest(latest);
-        const deduped = filtered.filter(({ address }) => {
-          if (deduplicator.isFresh(address)) {
-            deduplicator.hit(address);
-            return true;
-          }
-          return false;
-        });
+      /* There's usually 40+ coins, fetch them in a few rounds instead of all at once */
+      const getInRounds = async (addresses: string[]) => {
+        const perRound = 8;
+        const rounds = Math.ceil(addresses.length / perRound);
+        const coins: (Coin | undefined)[] = [];
 
-        logger.info(
-          `Latest | All: ${latest.length} | Filtered ${filtered.length} | Deduplicated: ${deduped.length}`
-        );
-
-        const coins = await Promise.all(
-          deduped.map((record) => getCoin(record.address))
-        );
-
-        return sortBy(coins, (coin) => coin.last5m).slice(0, 2);
-      };
-
-      const getMatchingTrending = async () => {
-        const trending = await getTrending();
-        const filtered = filterTrending(trending);
-        const deduped = filtered.filter(({ address }) => {
-          if (deduplicator.isFresh(address)) {
-            deduplicator.hit(address);
-            return true;
-          }
-          return false;
-        });
-
-        logger.info(
-          `Trending | All: ${trending.length} | Filtered ${filtered.length} | Deduplicated: ${deduped.length}`
-        );
-
-        const coins = await Promise.all(
-          deduped.map((record) => getCoin(record.address))
-        );
-
-        return sortBy(coins, (coin) => coin.last1h).slice(0, 2);
+        for (let i = 0; i < rounds; i++) {
+          const slicedAddresses = addresses.slice(
+            i * perRound,
+            i * perRound + perRound
+          );
+          const fetched = await Promise.all(
+            slicedAddresses.map((address) => getCoin(address))
+          );
+          coins.push(...fetched);
+        }
+        return coins;
       };
 
       while (true) {
-        const latest = await getMatchingLatest();
-        if (latest.length)
+        const trending = await getTrending();
+        const filteredRecords = filterRecords(trending);
+        const coins = await getInRounds(
+          filteredRecords.map((record) => record.address)
+        );
+        const withoutUndefined = coins.filter(
+          (coin) => coin !== undefined
+        ) as Coin[];
+        const filteredCoins = filterCoins(withoutUndefined);
+        const sorted = sortBy(filteredCoins, (coin) => coin.last1h);
+        const deduped = sorted.filter(({ address }) => {
+          return deduplicator.isFresh(address);
+        });
+        const top = deduped.slice(0, 1);
+        top.forEach(({ address }) => deduplicator.hit(address));
+
+        logger.info(
+          `Trending | All: ${trending.length} | Filtered ${filteredCoins.length} | Deduplicated: ${deduped.length}`
+        );
+
+        if (trending.length)
           sendTelegramNotification({
             chatId: telegramChatId,
-            coins: latest,
+            coins: deduped,
             token: telegramToken,
-            type: "latest",
           });
-        else {
-          const trending = await getMatchingTrending();
-          if (trending.length)
-            sendTelegramNotification({
-              chatId: telegramChatId,
-              coins: trending,
-              token: telegramToken,
-              type: "trending",
-            });
-        }
 
         logger.info(`Sleeping for ${interval} seconds.`);
         await sleep(interval * 1000);
