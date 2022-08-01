@@ -9,8 +9,3 @@ export const topTokenClient = got.extend({
   prefixUrl: "https://top100token.com/",
   headers,
 });
-
-export const topTokenApiClient = got.extend({
-  prefixUrl: "https://api.top100token.com/",
-  headers,
-});
