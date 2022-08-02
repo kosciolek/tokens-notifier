@@ -156,7 +156,7 @@ export const getCoin = async (address: string): Promise<Coin | undefined> => {
 
   if (!isKnownNetwork(parsed.network)) {
     logger.warn(
-      "Skipping a coin due to an unknown network.",
+      `Skipping a coin due to an unknown network. ${address} ${parsed.network}`,
       address,
       parsed.network
     );

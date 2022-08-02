@@ -104,7 +104,7 @@ program
         if (trending.length)
           sendTelegramNotification({
             chatId: telegramChatId,
-            coins: deduped,
+            coins: top,
             token: telegramToken,
           });
 
