@@ -101,7 +101,7 @@ program
           `Trending | All: ${trending.length} | Filtered ${filteredCoins.length} | Deduplicated: ${deduped.length}`
         );
 
-        if (trending.length)
+        if (top.length)
           sendTelegramNotification({
             chatId: telegramChatId,
             coins: top,
